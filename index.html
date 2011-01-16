@@ -1,78 +1,275 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<!DOCTYPE html>
+<html>
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<title>Code Syntax Highlighters in JavaScript - A Comparison</title>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" >
+<style>
+table {
+    border-collapse:collapse;
+    border-top:1px solid black;
+    border-bottom:1px solid black;
+}
+th {border-bottom:1px solid black;} 
+td {
+    border-bottom:1px dotted black;
+    text-align:center;
+}
+td.cat {
+    text-align:left;
+    font-weight:bold;
+}
+.good {background-color:green;}
+.bad {background-color:red;}
+dt {font-weight: bold;}
+</style>
+<script type="text/javascript">
 
-	<title>waylan/Highlighters-JS @ GitHub</title>
-	
-	<style type="text/css">
-		body {
-  		margin-top: 1.0em;
-  		background-color: #429d4f;
-		  font-family: "Helvetica,Arial,FreeSans";
-  		color: #ffffff;
-    }
-    #container {
-      margin: 0 auto;
-      width: 700px;
-    }
-		h1 { font-size: 3.8em; color: #bd62b0; margin-bottom: 3px; }
-		h1 .small { font-size: 0.4em; }
-		h1 a { text-decoration: none }
-		h2 { font-size: 1.5em; color: #bd62b0; }
-    h3 { text-align: center; color: #bd62b0; }
-    a { color: #bd62b0; }
-    .description { font-size: 1.2em; margin-bottom: 30px; margin-top: 30px; font-style: italic;}
-    .download { float: right; }
-		pre { background: #000; color: #fff; padding: 15px;}
-    hr { border: 0; width: 80%; border-bottom: 1px solid #aaa}
-    .footer { text-align:center; padding-top:30px; font-style: italic; }
-	</style>
-	
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-20784951-2']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
 </head>
-
 <body>
-  <a href="http://github.com/waylan/Highlighters-JS"><img style="position: absolute; top: 0; right: 0; border: 0;" src="http://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub" /></a>
+<h1>Code Syntax Highlighters in JavaScript - A Comparison</h1>
+<h2>Last Updated: January 16, 2011</h2>
 
-  <div id="container">
+<table>
+<tr>
+<th></th>
+<th><a href="http://softwaremaniacs.org/soft/highlight/en/">Highlight.js</a></th>
+<th><a href="http://code.google.com/p/google-code-prettify/">Google Code Prettify</a></th>
+<th><a href="http://alexgorbatchev.com/wiki/SyntaxHighlighter">SyntaxHighlighter</a></th>
+<th><a href="http://shjs.sourceforge.net/">SHJS</a></th>
+<th><a href="http://startbigthinksmall.wordpress.com/2009/05/28/beautyofcode-jquery-plugin-for-syntax-highlighter-2-0-by-alex-gorbatchev/">beautyOfCode</a></th>
+<th><a href="http://www.steamdev.com/snippet/">Snippet</a></th>
+<th><a href="http://code.google.com/p/jquery-chili-js/">Chili</a></th>
+<th><a href="http://pradador.com/code/lighterjs/">Lighter.js</a></th>
+<th><a href="http://mihai.bazon.net/projects/javascript-syntax-highlighting-engine">DlHighlight</a></th>
+<th><a href="http://plugins.jquery.com/project/JUSH">JUSH</a></th>
+</tr>
 
-    <div class="download">
-      <a href="http://github.com/waylan/Highlighters-JS/zipball/master">
-        <img border="0" width="90" src="http://github.com/images/modules/download/zip.png"></a>
-      <a href="http://github.com/waylan/Highlighters-JS/tarball/master">
-        <img border="0" width="90" src="http://github.com/images/modules/download/tar.png"></a>
-    </div>
+<tr>
+<td class="cat">Version</td>
+<td>5.16</td> <!-- Highlight.js -->
+<td>21-Jul-2010</td> <!-- Google Code Prettify -->
+<td>3.0.83</td> <!-- SyntaxHighlighter -->
+<td>0.6</td> <!-- SHJS -->
+<td>0.2</td> <!-- beautyOfCode -->
+<td>1.0.0</td> <!-- Snippet -->
+<td>2.2</td> <!-- Chili -->
+<td>2.1</td> <!-- Lighter.js -->
+<td>0.1</td> <!-- DlHighlight -->
+<td>1.10.1</td> <!-- JUSH -->
+</tr>
 
-    <h1><a href="http://github.com/waylan/Highlighters-JS">Highlighters-JS</a>
-      <span class="small">by <a href="http://github.com/waylan">waylan</a></span></h1>
+<tr>
+<td class="cat">Last Updated</td>
+<td>10/?/2010</td> <!-- Highlight.js -->
+<td>07/21/2010</td> <!-- Google Code Prettify -->
+<td>10/26/2010</td> <!-- SyntaxHighlighter -->
+<td>12/15/2008</td> <!-- SHJS -->
+<td>08/10/2010</td> <!-- beautyOfCode -->
+<td>?</td> <!-- Snippet -->
+<td>07/08/2008</td> <!-- Chili -->
+<td>12/13/2009</td> <!-- Lighter.js -->
+<td class="bad">?/?/2007</td> <!-- DlHighlight -->
+<td>10/19/2010</td> <!-- JUSH -->
+</tr>
 
-    <div class="description">
-      Code Syntax Highlighters in JavaScript
-    </div>
+<tr>
+<td class="cat">Framework</td>
+<td class="good">None</td> <!-- Highlight.js -->
+<td class="good">None</td> <!-- Google Code Prettify -->
+<td class="good">None</td> <!-- SyntaxHighlighter -->
+<td class="good">None</td> <!-- SHJS -->
+<td>jQuery</td> <!-- beautyOfCode -->
+<td>jQuery</td> <!-- Snippet -->
+<td>jQuery</td> <!-- Chili -->
+<td>MooTools</td> <!-- Lighter.js -->
+<td class="good">None</td> <!-- DlHighlight -->
+<td>jQuery</td> <!-- JUSH -->
+</tr>
 
-    <h2>Contact</h2>
-<p>Waylan Limberg (waylan@gmail.com)<br/>      </p>
+<tr>
+<td class="cat">Other Dependencies</td>
+<td class="good">None</td> <!-- Highlight.js -->
+<td class="good">None</td> <!-- Google Code Prettify -->
+<td class="good">None</td> <!-- SyntaxHighlighter -->
+<td class="good">None</td> <!-- SHJS -->
+<td>SyntaxHighlighter</td> <!-- beautyOfCode -->
+<td>SHJS</td> <!-- Snippet -->
+<td class="good">None</td> <!-- Chili -->
+<td class="good">None</td> <!-- Lighter.js -->
+<td class="good">None</td> <!-- DlHighlight -->
+<td class="good">None</td> <!-- JUSH -->
+</tr>
+
+<tr>
+<td class="cat">No. languages</td>
+<td>35</td> <!-- Highlight.js -->
+<td>?</td> <!-- Google Code Prettify -->
+<td>23</td> <!-- SyntaxHighlighter -->
+<td>39</td> <!-- SHJS -->
+<td>23</td> <!-- beautyOfCode -->
+<td>15</td> <!-- Snippet -->
+<td>11</td> <!-- Chili -->
+<td>8</td> <!-- Lighter.js -->
+<td>4</td> <!-- DlHighlight -->
+<td>9</td> <!-- JUSH -->
+</tr>
+
+<tr>
+<td class="cat">Serve Lang Defs Seperately</td>
+<td class="bad">No</td> <!-- Highlight.js -->
+<td class="good">Yes</td> <!-- Google Code Prettify -->
+<td class="good">Yes</td> <!-- SyntaxHighlighter -->
+<td class="good">Yes</td> <!-- SHJS -->
+<td class="good">Yes</td> <!-- beautyOfCode -->
+<td class="bad">No</td> <!-- Snippet -->
+<td class="good">Yes</td> <!-- Chili -->
+<td class="good">Yes</td> <!-- Lighter.js -->
+<td class="good">Yes</td> <!-- DlHighlight -->
+<td class="bad">No</td> <!-- JUSH -->
+</tr>
+
+<tr>
+<td class="cat">Size (not inlcuding CSS)</td>
+<td>93KB Max (Customizable)</td> <!-- Highlight.js -->
+<td>19KB + 1-2KB per lang</td> <!-- Google Code Prettify -->
+<td>16kB + 2-8KB per lang</td> <!-- SyntaxHighlighter -->
+<td> 6KB + 236B-13K per lang</td> <!-- SHJS -->
+<td>5KB + Dependencies</td> <!-- beautyOfCode -->
+<td>56KB + jQuery</td> <!-- Snippet -->
+<td>21KB + jQuery + 2-39KB per lang</td> <!-- Chili -->
+<td>11 KB + MooTools + 2-12KB per lang</td> <!-- Lighter.js -->
+<td>14KB</td> <!-- DlHighlight -->
+<td>18KB + jQuery</td> <!-- JUSH -->
+</tr>
 
 
-    <h2>Download</h2>
-    <p>
-      You can download this project in either
-      <a href="http://github.com/waylan/Highlighters-JS/zipball/master">zip</a> or
-      <a href="http://github.com/waylan/Highlighters-JS/tarball/master">tar</a> formats.
-    </p>
-    <p>You can also clone the project with <a href="http://git-scm.com">Git</a>
-      by running:
-      <pre>$ git clone git://github.com/waylan/Highlighters-JS</pre>
-    </p>
+<tr>
+<td class="cat">Bundled Styles</td>
+<td>11</td> <!-- Highlight.js -->
+<td>1</td> <!-- Google Code Prettify -->
+<td>7</td> <!-- SyntaxHighlighter -->
+<td>40</td> <!-- SHJS -->
+<td>See Dependencies</td> <!-- beautyOfCode -->
+<td class="bad">40 in one file</td> <!-- Snippet -->
+<td>0</td> <!-- Chili -->
+<td>6</td> <!-- Lighter.js -->
+<td>1</td> <!-- DlHighlight -->
+<td>1</td> <!-- JUSH -->
+</tr>
 
-    <div class="footer">
-      get the source code on GitHub : <a href="http://github.com/waylan/Highlighters-JS">waylan/Highlighters-JS</a>
-    </div>
+<tr>
+<td class="cat">Code Block Syntax</td>
+<td class="good">Flexible / Customizable</td> <!-- Highlight.js -->
+<td>Rigid</td> <!-- Google Code Prettify -->
+<td>Rigid</td> <!-- SyntaxHighlighter -->
+<td>Rigid</td> <!-- SHJS -->
+<td>Rigid</td> <!-- beautyOfCode -->
+<td class="good">Customizable</td> <!-- Snippet -->
+<td>Rigid</td> <!-- Chili -->
+<td>Rigid</td> <!-- Lighter.js -->
+<td>Rigid / Customizable</td> <!-- DlHighlight -->
+<td class="good">Customizable</td> <!-- JUSH -->
+</tr>
 
-  </div>
+<tr>
+<td class="cat">Autodect language</td>
+<td class="good">Yes</td> <!-- Highlight.js -->
+<td class="good">Yes</td> <!-- Google Code Prettify -->
+<td>No</td> <!-- SyntaxHighlighter -->
+<td>No</td> <!-- SHJS -->
+<td>No</td> <!-- beautyOfCode -->
+<td>No</td> <!-- Snippet -->
+<td>No</td> <!-- Chili -->
+<td>No</td> <!-- Lighter.js -->
+<td>No</td> <!-- DlHighlight -->
+<td>No</td> <!-- JUSH -->
+</tr>
 
-  
+<tr>
+<td class="cat">Line numbering</td>
+<td>No</td> <!-- Highlight.js -->
+<td>Per Block</td> <!-- Google Code Prettify -->
+<td>Yes</td> <!-- SyntaxHighlighter -->
+<td>No</td> <!-- SHJS -->
+<td>Yes</td> <!-- beautyOfCode -->
+<td>Yes</td> <!-- Snippet -->
+<td>Yes</td> <!-- Chili -->
+<td>Yes</td> <!-- Lighter.js -->
+<td>No</td> <!-- DlHighlight -->
+<td>No</td> <!-- JUSH -->
+</tr>
+
+<tr>
+<td class="cat">Copy plain text</td>
+<td class="good">By Default</td> <!-- Highlight.js -->
+<td class="good">By Default</td> <!-- Google Code Prettify -->
+<td>Redundant</td> <!-- SyntaxHighlighter -->
+<td class="good">By Default</td> <!-- SHJS -->
+<td>Redundant</td> <!-- beautyOfCode -->
+<td class="good">By Default</td> <!-- Snippet -->
+<td class="good">By Default</td> <!-- Chili -->
+<td>Clipboard (optional)</td> <!-- Lighter.js -->
+<td class="good">By Default</td> <!-- DlHighlight -->
+<td class="good">By Default</td> <!-- JUSH -->
+</tr>
+</table>
+
+<h2>Notes on the various categories:</h2>
+
+<dl>
+<dt>Version/last updated:</dt>
+<dd>Features change with new releases. The information in this comparison is only good for the versions specified. However, some projects are under more active development, so a more feature complete version may be available.</dd>
+    
+<dt>Framework:</dt> 
+<dd>While building on a JavaScript framework is not bad, it does limit the usefulness of a project. Some users may not want the extra bandwidth overhead required by a full framework. Other's may already be using a different framework and would rather not need to support another one.</dd>
+
+<dt>Other Dependencies:</dt> 
+<dd>Some of the projects highlighted here build on top of others. </dd>
+
+<dt>Serve Lang Defs Seperately:</dt> <dd>Some projects are configured so that only the language definitions you actually need are downloaded, which saves bandwidth. This also allows you to provide your own language definitions and serve them on your site without contributing them upstream for inclusion in the base package. While you certainly are encouraged to contribute upstream, this allows immediately deployment without waiting for the next release. It also allows support of unusual one-off implementations without involving third parties or unsupported hacks.</dd>
+
+<dt>Bundled styles:</dt> 
+<dd>While anyone can create their own CSS styles, it can be nice to get multiple styles to chose from out of the box. In the end though, probably not a very important factor. Although, some projects may serve multiple styles in one CSS file which wastes bandwidth if the unused styles are not deleted before deployment.</dd>
+
+<dt>Code Block Syntax:</dt> 
+<dd>All projects work by scanning the html page for a specifically marked section of HTML which contains a code block and running the enclosed code block through its parser. Some projects only allow the code blocks to be marked up in one very rigid way. Others allow multiple variations of the HTML which constitutes a code block. Some even allow you to define your own code block syntax when initializing the program in JavaScript.</dd>
+
+<dt>Auto-Detect language:</dt> 
+<dd>Some projects do not require a language to be specified for each code block and will try to guess. Of course, 100% accuracy can never be guaranteed, especially for shorter blocks.</dd>
+
+<dt>Line Numbering:</dt> 
+<dd>Some projects offer a built-in feature to generate line numbers for code blocks.  However, in some projects, you can only specify this feature in JavaScript - which in the common case means all code blocks on the page will get the same behavior.  However, other projects may allow a per block behavior based on a clue in the block itself (usually a html class set on the containing block).</dd>
+
+<dt>Copy plain text:</dt> 
+<dd>Your users will not want to manually remove line numbers or other styling cues from copied code blocks.  However, there are a number of different ways this can be implemented:
+	<dl>
+	<dt>To Clipboard:</dt>
+	<dd>Clicking a link provided in a caption/header will immediately copy the raw text to the OS's clipboard.</dd>
+
+	<dt>With Pop-Up:</dt>
+	<dd>Clicking a link in a caption/header will open a pop-up in the browser which contains the raw text to be selected and copied.</dd>
+
+	<dt>In-Line:</dt> 
+	<dd>Clicking a link in a caption/header will toggle the styled text to raw text which can then be selected and copied.</dd>
+
+	<dt>By Default:</dt> 
+	<dd>The styling is implemented in such a way that selecting and copying the styled text will always result in perfectly formatted raw text. In other words, no "copy plain text" feature is necessary. This generally (but not always) coincides with not having line numbers.</dd>
+
+	<dt>Redundant:</dt>
+	<dd>Some projects offer multiple of the above options. However, rather than using only one of the above at a time, they offer multiple choices to the site visitor as once, which is unnecessarily redundant and may confuse the user.</dd>
+	</dl>
+</dd>
+</dl>
 </body>
 </html>
