@@ -1,0 +1,84 @@
+﻿Google-Code-Prettify Review
+===========================
+
+* Review Updated: February 10, 2011
+* Project: [Google-Code-Prettify][]
+* Version Reviewed: 21-Jul-2010
+
+This is a review of the JavaScript module [Google-Code-Prettify][] and is part of a [series][] of reviews of JavaScript modules for highlighting source code contained in HTML files on the web and displayed in a web browser.
+
+As the name implies, Google-Code-Prettify is developed and supported by Google itself.  In fact, it is the tool used by [code.google.com][] for highlighting the source files in the many thousands of projects hosted there. That in itself says something about the module.  For an idea of what it looks like and how well it works, a quick browse of code.google.com may suffice. But let's dig in a little deeper.
+
+Life of project
+---------------
+
+Unlike most projects, Google-Code-Prettify uses its release date as its version number. While we don't get any indication of the maturity of the project, or how many releases away from release x we may be, we are able to quickly see how old the release is. July 21, 2010 is not an old release as of the time of this writing. Additionally, looking at the source repository, the [initial commit][] happened on October 4, 2006, so the project has been around for a while and [commit 111][] appears to be the last commit on the latest release date. The releases do not appear to be tagged in the repository and there are no branches, so all 111 commits are presumably on trunk. I can't say for certain (without looking at the code) that commit 111 is actually included in the latest release, but I can say that the project appears to be rather mature and active.  In fact, as of the time of this writing, the repository has moved up to commit 122 and there are only 33 [issues][] unresolved. Most of those issues are simply requests for support of additional languages with the rest being requests for improvements to the existing supported languages.
+
+While I had to work a little harder to get a picture of the life and history for this project, it is evident that it is an active and mature project and one I would be comfortable using in my projects.
+
+Dependencies
+------------
+
+Google-Code-Prettify requires no other JavaScript libraries to work and claims support of all modern browsers.  While I haven't tested browser support, the fact that Google sees fit to use it on such a large site as code.google.com is enough for me to be satisfied that any browser quirks have been worked out.
+
+Language Support
+----------------
+
+Unlike all other source code highlighters I've come across (both client and server side), Google-Code-Prettify doesn't list specific languages supported or even give a number. That is because it works differently than all other highlighters. Google-Code-Prettify breaks the various languages it supports down into a few basic types (C-like, Bash-like, and XML-like) and supports the many languages of each type. While this may seem strange at first, remember this it not a compiler. It doesn't need to understand the intricacies of each individual language. It just needs to identify the basic structure (keywords, strings, integers, etc.) and style it. This has the nice side-effect of making it easy to support language detection when no language is specified.
+
+Automatic language detection is a rare and desirable feature. While it is never perfect, not having to specify the language certainly simplifies things on the server end. Regarding language detection the [documentation][] states the following:
+
+> The lexer should work on a number of languages including C and friends, Java, Python, Bash, SQL, HTML, XML, CSS, Javascript, and Makefiles. It works passably on Ruby, PHP, VB, and Awk and a decent subset of Perl and Ruby, but, because of commenting conventions, doesn't work on Smalltalk, or CAML-like languages.
+
+Of course, the three basic types are not all-inclusive so support is also included for other types of languages which need to be specified to be identified and highlighted. While the basic types are all included in the main module (which is still only 19KB minimized), these specific languages are broken out into their own separate JavaScript files (at 1KB to 2KB each) and only the languages you need are downloaded; keeping bandwidth usage down.  As of the time of this writing, 14 such languages are supported as [listed][] in the repository. Add to those 14 all the C-like, Bash-like and XML-like languages and you get a pretty large number. 
+
+The documentation also asks for requests and submissions of patches to support additional languages in their issue tracker. While this is good in itself, there is nothing stopping you from immediately serving those additional languages from your own server right away.
+
+Perhaps more than any other JavaScript based highlighting module I'm aware of. Low bandwidth and a large number of supported languages makes this one of the better highlighting modules available.
+
+Bundled CSS Styles
+------------------
+
+Only one CSS style sheet is included, but that's enough to get you started. Besides, if you want custom looks, you probably want to write your own anyway. And there is nothing stopping someone from publishing other style sheets that work with the project.
+
+The Underlying HTML
+-------------------
+
+Unfortunately, this is Google-Code-Prettify's only real downfall. It could have had a perfect score, but it is very rigid about what it considers a code block and offers no easy way to override it[^1].
+
+As [documented][documentation], after including a link to the style sheet and script, add `onload="prettyPrint()"` to your document's body tag and mark up your code blocks like this:
+
+    <pre class="prettyprint">
+	// your code here...
+	</pre>
+
+That's it. That's the only way to specify code blocks that get highlighted. Without the "prettyprint" class, your code block will be ignored, no exceptions. That means markup languages like Markdown or Textile won't work unless the document author uses raw HTML for the code blocks, or modifies the Markdown/Textile implementation running on the server.
+
+You can also specify specific languages and turn line-numbering on by adding additional classes to the pre tag (i.e., `<pre class="prettyprint linenums lang-html">`). Yes, if you want line-numbering or support for those 14 specific languages, you must have that hard coded on the server end for each specific code block. True, server-side template systems that build HTML can include the line-numbering class into every code block. And source code repositories (like code.goggle.com) can pull language types from file extensions to dynamically build the appropriate syntax. However, for basic code blocks included in the body of blog posts and documentation, you are forced to hard code everything by hand.
+
+Of course, if every highlighting module all used the same syntax, then all the code block generators (Markdown, Textile, etc.) would use that syntax. But that is not the case and syntax highlighters should allow the code block syntax to be defined per site, per page, or even per block.
+
+Viewed in the Browser
+---------------------
+
+Obviously, regardless of the implementation details, its the end result as viewed in the browser that is important. If you don't get this right, nothing else matters. And Google-Code-Prettify seems to get this right.
+
+When line numbers are turned on, each line of code is a separate list-item (`<li>`), so the line numbers actually always line up properly. And at least in modern browsers (I have not tested older browsers) the line numbers do not get copied when the source is selected and copied to the clipboard &mdash; no fancy features required.
+
+In fact, the whole thing is pretty plain and simple. You just have lots of good styling hooks to spice things up according to your tastes in your own CSS. Even if you don't like the default line-numbering scheme (line numbers only display on every fifth line), the CSS hooks are there to change it, so that is a good thing overall.
+
+Summary
+-------
+
+As noted, support for some languages is a little flakey and you get absolutely no flexibility in how you define code blocks, but it works well, looks good, and is in active development with a large user base. While certainly one of the better highlighters available, it's not perfect, or necessarily the best in my opinion. But if you have the right set of priorities (perhaps similar to code.google.com), it is a top contender.
+
+[Google-Code-Prettify]: http://code.google.com/p/google-code-prettify/
+[series]: http://waylan.github.com/Highlighters-JS/
+[code.google.com]: http://code.google.com/hosting/
+[initial commit]: http://code.google.com/p/google-code-prettify/source/detail?r=2
+[commit 111]: http://code.google.com/p/google-code-prettify/source/detail?r=111
+[issues]: http://code.google.com/p/google-code-prettify/issues/list
+[documentation]: http://google-code-prettify.googlecode.com/svn/trunk/README.html
+[listed]: http://code.google.com/p/google-code-prettify/source/browse/#svn%2Ftrunk%2Fsrc
+
+[^1]: By comparison, some modules are easily wrapped with a couple lines of code using your JavaScript framework of choice, which finds the code blocks (as you define them), and passes them on to the highlighter. While it doesn't look imposable to do here, a quick perusal of the source indicates that you would have to reimplement much of the module for a completely functioning product.
