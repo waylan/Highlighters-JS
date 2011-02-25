@@ -1,0 +1,77 @@
+SyntaxHighlighter Review
+===========================
+
+Last Updated: February 24, 2011
+
+* Url: <http://alexgorbatchev.com/SyntaxHighlighter>
+* Version Reviewed: 3.0.83
+
+This is a review of the JavaScript module [SyntaxHighlighter][] and is part of a [series][] of reviews of JavaScript modules for highlighting source code contained in HTML files on the web and displayed in a web browser.
+
+Life of project
+---------------
+
+With only a quick glance at the home page, one can easily see this is a mature and active project. There are many regular (and recent) updates in the "News" section announcing new releases, the current version is 3+, and the project has been under the direction of the same developer since 2004. On top of that, it boasts quite an impressive [list of users][], including Apache, Mozilla, Yahoo and Wordpress.
+
+Dependencies
+------------
+
+SyntaxHighlighter has no dependencies and can stand completely alone. That means no frameworks are required and your project isn't tied to one or forced to dance around multiple frameworks just for syntax highlighting. Always a good thing.
+
+Interestingly, there is also an entire page is links to [integration instructions][] for various other projects and packages that SyntaxHighlighter can easily work with.
+
+Language Support
+----------------
+
+Support for 23 different [languages][] are specifically listed on the project's website.  However, it really is more than that. For example, XML is listed as one language, but that "brush" (as its called) includes support for XML, XSLT, XHTML and HTML. There is also a list of known [third-party brushes][] which you can make use of.
+
+Which brings us to the next point; easy "brush" is contained in a separate JavaScript file and served only where it is needed, which saved bandwidth. This also allows you to build your own "brushes" and start serving them right away. There's no need to wait for them to be applied upstream.
+
+A word of cation though. Prior to version 3, apparently each "brush" had to be specifically loaded on each page with a separate `<script>` tag. That means if you anticipated the need for a specific "brush" you would load it whether it was needed or not, which used bandwidth unnecessarily. Version 3 has included a new [Autoloader][] to address this. The Autoloader will only load "brushes" which are actually used on the page. However, the Autoloader still needs to be fed a list of all the "brushes" along with any aliases before it can load them. This means any time you need to add support for a specific language, you have to edit the JavaScript on that page which calls the Autoloader.
+
+Bundled CSS Styles
+------------------
+
+SyntaxHighlighter comes bundles with 7 different CSS stylesheets, which is more than enough to get you started. You can use one of the bundled "[themes][]," adapt one to your liking, or start from scratch for your own custom styling.
+
+The Underlying HTML
+-------------------
+
+SyntaxHighlighter is a little unusual in this department. It is rigid in what HTML it accepts, but it accepts a couple different formats - at least one of which  is non-standard.
+
+Regarding that rigidity, it is unfortunate that the end user cannot define the type of HTML blocks s/he considers to be code blocks for highlighting. Your stuck using the format set by SyntaxHighlighter. That means tools like Markdown and Textile won't produce code blocks that are usable with SyntaxHighlighter. A real shame. Fortunately, there is at least one [third party module][] which addresses this issue. Check back later for my separate review of that package. Still its disappointing that a third party module was necessary to fix this glaring omission in an otherwise decent project.
+
+So what are the two ways to define code blocks? The first is a rather typical use of the `pre` tag. Take a look:
+
+    <pre class="brush: python">
+    # your code here ...
+    </pre>
+
+Aside from the required "brush" class (which oddly includes a space), there are a number of other useful options you can define in either your JavaScript (in calling the highlighter) or in your HTML (when defining the code block). See the [documentation][] for the details.
+
+And now for the weird part - that second code block syntax. Strangely, code blocks can also be defined inside a `script` tag as `CDATA`. Apparently this removes the need for the code blocks to be escaped. But it also means that they won't appear in RSS feeds and the like. See the [documentation][script-method] for the specifics.
+
+Personally, I would rather have a tool like Markdown escape my code  blocks for me server-side, and have the ability to define my own code block syntax client side.
+
+Viewed in the Browser
+---------------------
+
+But what does it look like in the browser? Better than in older versions. Previously, copy and paste required all sorts of hoops, but with the current version, select, copy and paste work like they should. The old toolbar with options has been downsized to a single unobtrusive button which pops up an about dialog.
+
+Unfortunately, this is accomplished with the two-column, one-row table method. Column one contains all the line numbers in one row, and column two contains all the code lines in one row. Yes, selection of the code doesn't select any line numbers, but the fine balance in the CSS rules is often not maintained in these types of implementations and line numbers can mysteriously no longer line up with the appropriate lines. While the samples on the site look fine, I've seen this method fail too many times to trust it here.
+
+Summary
+-------
+
+SyntaxHighlighter has a lot of decent (and perhaps even unnecessary) features. It doesn't have any outside dependencies and is considerate of bandwidth. However, the many customization options fall short of providing customization where is is really needed. Perhaps that is why there is such a long list of [integration instructions][]. In the end, this is a decent project, but will likely require some third party code wrapper to make it truly useful as a general syntax highlighting module. Given its wide use, that third party module may already exist, but the benefit of no dependencies is lost. If this was a version 1 (or less) product, I could let that slide, but not as a version 3 product.
+
+[series]: http://waylan.github.com/Highlighters-JS
+[SyntaxHighlighter]: http://alexgorbatchev.com/SyntaxHighlighter
+[list of users]: http://alexgorbatchev.com/SyntaxHighlighter/spotlight.html
+[integration instructions]: http://alexgorbatchev.com/SyntaxHighlighter/integration.html
+[languages]: http://alexgorbatchev.com/SyntaxHighlighter/manual/brushes/
+[third party brushes]: http://www.undermyhat.org/blog/2009/09/list-of-brushes-syntaxhighligher/
+[themes]: http://alexgorbatchev.com/SyntaxHighlighter/manual/themes/
+[third party module]:  http://startbigthinksmall.wordpress.com/2009/05/28/beautyofcode-jquery-plugin-for-syntax-highlighter-2-0-by-alex-gorbatchev/
+[documentation]: http://alexgorbatchev.com/SyntaxHighlighter/manual/configuration/
+[script-method]: http://alexgorbatchev.com/SyntaxHighlighter/manual/installation.html#script__method

@@ -1,0 +1,58 @@
+Lighter.js Review
+===========================
+
+Last Updated: February 24, 2011
+
+* Url: <http://shjs.sourceforge.net/>
+* Version Reviewed: 2.0
+
+This is a review of the JavaScript module [Lighter.js][] and is part of a [series][] of reviews of JavaScript modules for highlighting source code contained in HTML files on the web and displayed in a web browser.
+
+Life of project
+---------------
+
+Based upon comments and reactions listed on the bottom of the project page, lighter.js appears to have been first released sometime in 2009 with version 2.0 being released in 2010. Based upon commit messages in the [repository][repo], it was imported from SVN to Git without maintaining the history, so I can't determine much more about the history of the project. In any event, it has had recent activity and appears to be moving forward as a fully support project.
+
+I should note that the code in the repository is tagged version 2.1, but the project page listed version 2.0. I'm uncertain which version you actually get when you download from the project page or what the differences are between them.
+
+Dependencies
+------------
+
+Lighter.js is built on top of the [MooTools][] framework (version 1.2.1+) and will not function without it. This provides some nice features, like the ability to identify any HTML as a code block and pass it in with MooTools simple API, but also adds the extra bandwidth of a full framework and could create some issues if you are already using a different framework on your site. However, if your undecided about which framework to us and need one, or are already using MooTools, then this may be the choice for you. 
+
+Language Support
+----------------
+
+A measly total of 8 languages are currently supported. The good news is that each language definition is served separately so in addition to saving on bandwidth, you could provide your own definitions. However, if you're not interested in developing your own definitions, and you need support for more than the 8 included languages (like, say, something as common as Python or Perl - ouch!), then you should move on. As an interesting side note, this confused be at first as it's not explicitly explained in the documentation, but each language definition is referred to as a "Fuel."
+
+Bundled CSS Styles
+------------------
+
+The 6 different styles (called "Flames") included are plenty sufficient and are open for modifications as usual. An unusual feature here is that the style sheets do seem to need to be linked in the HTML, but are dynamically loaded by Lighter.js. This allows the ability to easily choose a "Flame" in your JavaScript code. I haven't worked out the specifics yet, but thought it was worth noting.
+
+The Underlying HTML
+-------------------
+
+This is where Lighter.js reliance on MooTools really shines. Lighter.js doesn't have any 'default' code block syntax. You can use whatever you want. Then, when initializing the highlighter, just pass in the elements which contain code blocks. 
+
+For example, to highlight all `pre` tags on the page, use this single line of JavaScript:
+
+    $$('pre').light();
+
+The `light` function also takes a number of options, providing a number of useful features.  See the [documentation][] for details.
+
+Viewed in the Browser
+---------------------
+
+One of the options you can pass in is the output mode. You can chose from "pre", "ol", "div" and "table". The "pre" option provides a simple code block wrapped in a `pre` tag with no line numbers. Simple and elegant. The "div" option provides more styling hooks, but a warning is provided int he docs. Unlike most table implementations, this one actually puts each line of code in a separate row of the table - making copy and paste imposable without getting line numbers. The "ol" option is my preferred method (as I've detailed elsewhere), but when selecting, copying and pasting blank lines are lost. Other projects have already solved this problem. At least the line numbers are not copied (in modern browsers).
+
+Summary
+-------
+
+This is a nice start to a useful tool. If you're already using MooTools and don't need support for more that the 8 included languages, this is the tool for you.However, if your needs extend beyond that, I'd suggest looking elsewhere. Perhaps some competing projects could borrow a few of Lighter.js' stronger points and implement them in a non-framework-dependant library.
+
+[series]: http://waylan.github.com/Highlighters-JS
+[Lighter.js]: http://pradador.com/code/lighterjs/
+[repo]: https://github.com/pradador/Lighter
+[MooTools]: http://mootools.net/
+[documentation]: http://pradador.com/code/lighterjs/#options

@@ -1,0 +1,62 @@
+SHJS Review
+===========================
+
+Last Updated: February 24, 2011
+
+* Url: <http://shjs.sourceforge.net/>
+* Version Reviewed: 0.6
+
+This is a review of the JavaScript module [SHJS][] (Syntax Highlighter in JavaScript) and is part of a [series][] of reviews of JavaScript modules for highlighting source code contained in HTML files on the web and displayed in a web browser.
+
+Life of project
+---------------
+
+With a quick glance at the [News][] page for the project, it appears that SHJS was in active development between January 2007 and December 2008. Outside of those two years the project has been stagnate and is still only at version 0.6 although being one of the earliest JavaScript highlighting libraries around. And that's a shame; it has a lot of potential.
+
+Dependencies
+------------
+
+SHJS has no dependencies per say. It does use language definitions from a third party project, but those definitions are packed up and shipped with SHJS. And with no framework requirements, it is a standalone library which should work for any site.
+
+Language Support
+----------------
+
+With support for 39 languages included, SHJS supports more than any other JavaScript Highlighting library I'm aware of. On top of that, the language definitions follow the same format as the [GNU Source-Highlight] project (a server-side command-line program). As of this writing, GNU Source-highlight lists support for 65 languages and you can always add your own. 
+
+As SHJS serves each language definition in a separate file (keeping bandwidth down), one could easily convert those additional 24 language definitions over to SHJS. With one caveat; the regular expression syntax needs to be converted from Boost to JavaScript. For the simple expressions, SHJS actually provides a tool to do the conversion for you. But for the complex stuff, you'll need to work it out manually.
+
+You also need to be aware that each language definition needs to be loaded on your pages with a separate `script` tag. If you don't load that language, you don't get support for it. However, there is an autoloader which acts as a shortcut. Unfortunately, based on the [documentation][], it appears that the autoloader will only handle one language at a time, so no multiple languages on one page with the autoloader. It's back to multiple script tags, which all get loaded regardless of whether they are actually needed.
+
+Bundled CSS Styles
+------------------
+
+SHJS bundles an amazingly high number of 40 different CSS style sheets to easily style your code however you want. And you can always start with the base 'default' style and build your own. Apparently, the 40 themes were taken from the [Highlight][] project (another server-side command-line program) which currently lists 80 different themes. The good news is that only the theme you actually want to use is ever loaded, so no bandwidth is wasted here.
+
+The Underlying HTML
+-------------------
+
+Defining a code block involves a simple rigid `pre` tag with a class to set the language. Like this:
+
+    <pre class="sh_python">
+    # Code goes here ...
+    </pre>
+
+No extra features are provided. No option to redefine the code block syntax. No line numbers. No anything else. While fairly simple and elegant, it won't work with the output from tools like Markdown or Textile.
+
+Viewed in the Browser
+---------------------
+
+With such a simple feature set, the output is simple and elegant.  Being a simple `pre` tag with the code wrapped in lots of `spans` for styling hooks, it is simple to select, copy and paste, looks nice and has no bloat. But it also has no line numbers or other advanced features.
+
+Summary
+-------
+
+As a simple elegant solution with an impressive record-breaking number of supported languages and themes, SHJS has a good jump on the competition. However, the complete lack of features and failure to provide the ability for you to define your own syntax for marking up code blocks, it falls short. That said, given its version 0.6 status, with a little TLC this library could be a winner. In fact, at least one [JQuery wrapper][] already exists, which addresses a few of those issues (while unfortunately creating others). Look for my review in the near future.
+
+[series]: http://waylan.github.com/Highlighters-JS
+[SHJS]: http://shjs.sourceforge.net/
+[News]: http://shjs.sourceforge.net/doc/news.html
+[GNU Source-Highlight]: http://www.gnu.org/software/src-highlite/
+[documentation]: http://shjs.sourceforge.net/doc/documentation.html
+[Highlight]: http://andre-simon.de/
+[JQuery wrapper]: http://www.steamdev.com/snippet/
